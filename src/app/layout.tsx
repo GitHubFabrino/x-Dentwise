@@ -4,6 +4,7 @@ import "./globals.css";
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
+import TanStackProvider from "@/components/providers/TanStackProvider";
 import UserSync from "@/components/UserSync";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <TanStackProvider>
     <ClerkProvider>
       <html lang="en">
         <body
@@ -36,5 +38,6 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
+    </TanStackProvider>
   );
 }
