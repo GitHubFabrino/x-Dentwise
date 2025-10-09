@@ -1,13 +1,34 @@
 "use client"
 
 
+import Navbar from '@/components/Navbar'
+import { SettingsIcon } from 'lucide-react'
 import React from 'react'
+import { useUser } from '@clerk/nextjs'
+import { useGetDoctors } from '@/hooks/use-doctors'
+import { useGetAppointments } from '@/hooks/use-appointments'
+import AdminStats from '@/components/admin/AdminStats'
+import DoctorsManagement from '@/components/admin/DoctorsManagement'
+import RecentAppointments from '@/components/admin/RecentAppointments'
 
 function AdminDashboardClient() {
 
+  const { user } = useUser();
+
+  const { data: doctors = [], isLoading: doctorsLoading } = useGetDoctors();
+  const { data: appointments = [], isLoading: appointmentsLoading } = useGetAppointments();
 
 
+  const stats ={
+    totalDoctors: doctors.length ,
+    activeDoctors : doctors.filter((doc)=>doc.isActive).length,
+    totalAppointments: appointments.length,
+    completedAppointments: appointments.filter((app)=>app.status === "COMPLETED").length,
+    
+  }
 
+  if(doctorsLoading || appointmentsLoading) return <p>Loading...</p>
+ 
 
   return (
     <div className="min-h-screen bg-background">
@@ -23,7 +44,7 @@ function AdminDashboardClient() {
             </div>
             <div>
               <h1 className="text-4xl font-bold mb-2">
-                Welcome back, {user?.firstName || "Admin"}!
+                Welcome back, {user?.firstName}
               </h1>
               <p className="text-muted-foreground">
                 Manage doctors, oversee appointments, and monitor your dental practice performance.
@@ -31,7 +52,7 @@ function AdminDashboardClient() {
             </div>
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:!block">
             <div className="w-32 h-32 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center">
               <SettingsIcon className="w-16 h-16 text-primary" />
             </div>

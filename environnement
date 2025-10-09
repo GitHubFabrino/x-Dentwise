@@ -1,0 +1,11 @@
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_ZmluZS1oZXJvbi02My5jbGVyay5hY2NvdW50cy5kZXYk
+CLERK_SECRET_KEY=sk_test_VEfZz40XVKYJtNatGuPGhpQxV5foDX46syfo8QoygU
+
+#pg
+DATABASE_URL="postgresql://neondb_owner:npg_ZUu1OJj4eipT@ep-morning-snow-adjvt8zh-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+# uncomment next line if you use Prisma <5.10
+# DATABASE_URL_UNPOOLED="postgresql://neondb_owner:npg_ZUu1OJj4eipT@ep-morning-snow-adjvt8zh.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+
+NEXT_PUBLIC_VAPI_ASSISTANT_ID=11bbf5ea-74a9-4462-bc70-5406df6f5056
+
+ADMIN_EMAIL=rakotoharilalainafabrino@gmail.com
