@@ -89,7 +89,7 @@ function DoctorsManagement() {
 
                 <div className="flex items-center gap-3">
                   <div className="text-center">
-                    <div className="font-semibold text-primary">{doctor.appointmentCount}</div>
+                    <div className="font-semibold text-primary">{doctor.appointmentsCount}</div>
                     <div className="text-xs text-muted-foreground">Appointments</div>
                   </div>
 
