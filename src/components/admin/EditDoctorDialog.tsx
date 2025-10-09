@@ -33,11 +33,11 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
     }
   };
 
-  // const handleSave = () => {
-  //   if (editingDoctor) {
-  //     updateDoctorMutation.mutate({ ...editingDoctor }, { onSuccess: handleClose });
-  //   }
-  // };
+  const handleSave = () => {
+    if (editingDoctor) {
+      updateDoctorMutation.mutate({ ...editingDoctor }, { onSuccess: handleClose });
+    }
+  };
 
   const handleClose = () => {
     onClose();
@@ -46,7 +46,7 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      {/* <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Edit Doctor</DialogTitle>
           <DialogDescription>Update doctor information and status.</DialogDescription>
@@ -146,7 +146,7 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
             {updateDoctorMutation.isPending ? "Saving..." : "Save Changes"}
           </Button>
         </DialogFooter>
-      </DialogContent> */}
+      </DialogContent>
     </Dialog>
   );
 }
