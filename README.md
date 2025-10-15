@@ -1,12 +1,21 @@
-# DentWise - Application de Gestion Dentaire
+# DentWise - Application de Gestion Dentaire avec IA assistante
 
-Application web moderne de gestion de cabinet dentaire développée avec Next.js et PostgreSQL, conteneurisée avec Docker.
+![DentWise Logo](public/pub.png)
 
-## 🚀 Fonctionnalités
+Application web moderne de gestion de cabinet dentaire avec assistance vocale IA, développée avec Next.js et PostgreSQL, conteneurisée avec Docker. L'application intègre une intelligence artificielle avancée pour faciliter la gestion des rendez-vous et le suivi des patients.
+
+## 🤖 Fonctionnalités IA
+
+- **Assistant vocal intelligent** pour une interaction naturelle
+- Prise de rendez-vous automatisée
+- Rappels intelligents pour les patients
+- Analyse des données pour des insights prédictifs
+
+## 🚀 Fonctionnalités principales
 
 - Interface utilisateur moderne et réactive
-- Gestion des patients et des rendez-vous
-- Tableau de bord administratif
+- Gestion complète des patients et des rendez-vous
+- Tableau de bord administratif avec indicateurs en temps réel
 - Base de données PostgreSQL pour un stockage fiable
 - Conteneurisation avec Docker pour un déploiement facile
 
@@ -120,11 +129,28 @@ Pour un environnement de production :
 3. Configurez un reverse proxy (Nginx, Traefik)
 4. Activez HTTPS avec Let's Encrypt
 
+## 🛠️ Technologies et Bibliothèques
+
+### Backend
+- **Next.js 14** - Framework React full-stack
+- **Prisma** - ORM pour la base de données
+- **Clerk** - Authentification et gestion des utilisateurs
+- **VAPI** - Intégration d'assistant vocal IA
+- **PostgreSQL** - Base de données relationnelle
+
+### Frontend
+- **React 18** - Bibliothèque JavaScript pour les interfaces utilisateur
+- **Tailwind CSS** - Framework CSS utilitaire
+- **Shadcn/ui** - Composants UI accessibles et personnalisables
+- **Framer Motion** - Animations fluides
+
 ## 📚 Documentation
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Docker Documentation](https://docs.docker.com/)
 - [Prisma Documentation](https://www.prisma.io/docs/)
+- [Clerk Documentation](https://clerk.com/docs)
+- [VAPI Documentation](https://docs.vapi.ai/)
 
 ## 📝 Licence
 
