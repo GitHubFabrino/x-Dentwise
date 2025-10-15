@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DentWise - Application de Gestion Dentaire
 
-## Getting Started
+Application web moderne de gestion de cabinet dentaire développée avec Next.js et PostgreSQL, conteneurisée avec Docker.
 
-First, run the development server:
+## 🚀 Fonctionnalités
+
+- Interface utilisateur moderne et réactive
+- Gestion des patients et des rendez-vous
+- Tableau de bord administratif
+- Base de données PostgreSQL pour un stockage fiable
+- Conteneurisation avec Docker pour un déploiement facile
+
+## 🛠 Prérequis
+
+- Docker (version 20.10.0 ou supérieure)
+- Docker Compose (version 1.29.0 ou supérieure)
+- Git (pour cloner le dépôt)
+
+## 🚀 Installation
+
+1. **Cloner le dépôt**
+   ```bash
+   git clone [URL_DU_DEPOT]
+   cd x-Dentwise
+   ```
+
+2. **Configurer les variables d'environnement**
+   Créez un fichier `.env` à la racine du projet :
+   ```env
+   # Configuration de la base de données
+   POSTGRES_USER=postgres
+   POSTGRES_PASSWORD=postgres
+   POSTGRES_DB=dentwise
+   
+   # Configuration de l'application
+   NODE_ENV=development
+   DATABASE_URL=postgresql://postgres:postgres@db:5432/dentwise?schema=public
+   ```
+
+## 🐳 Démarrage avec Docker Compose
+
+### Développement
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Démarrer les conteneurs en arrière-plan
+sudo docker-compose up -d
+
+# Suivre les logs en temps réel
+sudo docker-compose logs -f
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'application sera disponible à l'adresse : http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Arrêter les conteneurs
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+sudo docker-compose down
+```
 
-## Learn More
+## 🔧 Commandes utiles
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Accéder au shell du conteneur de l'application
+sudo docker-compose exec app sh
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Exécuter des commandes dans le conteneur
+sudo docker-compose exec app npm run [commande]
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Redémarrer un service spécifique
+sudo docker-compose restart app
 
-## Deploy on Vercel
+# Voir l'état des conteneurs
+sudo docker-compose ps
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Nettoyer les ressources inutilisées
+sudo docker system prune
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌐 Configuration des ports
+
+| Service | Port conteneur | Port hôte |
+|---------|----------------|-----------|
+| Application | 3000 | 3000 |
+| Base de données | 5432 | 5434 |
+
+## 💾 Volumes
+
+- `postgres_data` : Persistance des données PostgreSQL
+- `./:/app` : Montage du code source pour le développement
+- `/app/node_modules` : Cache des dépendances Node.js
+- `/app/.next` : Cache des builds Next.js
+
+## 🔍 Dépannage
+
+### Problèmes de ports
+
+Si un port est déjà utilisé, modifiez-le dans `docker-compose.yml`.
+
+### Erreurs de permission
+
+```bash
+# Ajouter l'utilisateur au groupe docker
+sudo usermod -aG docker $USER
+
+# Redémarrer la session utilisateur
+newgrp docker
+```
+
+### Reconstruire les images
+
+```bash
+sudo docker-compose up -d --build
+```
+
+## 🚀 Production
+
+Pour un environnement de production :
+1. Modifiez `NODE_ENV=production`
+2. Utilisez des variables d'environnement sécurisées
+3. Configurez un reverse proxy (Nginx, Traefik)
+4. Activez HTTPS avec Let's Encrypt
+
+## 📚 Documentation
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Docker Documentation](https://docs.docker.com/)
+- [Prisma Documentation](https://www.prisma.io/docs/)
+
+## 📝 Licence
+
+[À spécifier selon la licence de votre projet]
