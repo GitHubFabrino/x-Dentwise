@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.gitignore
+.env.local
+.env.development
+.env.test
+.env.production
+Dockerfile
+.dockerignore
+README.md
+.next/cache
+.vscode
+dist

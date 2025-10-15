@@ -1,0 +1,75 @@
+# Version de la syntaxe Docker Compose
+version: '3.8'
+
+# Définition des services (conteneurs) de l'application
+services:
+  # Service pour l'application Next.js
+  app:
+    # Configuration du build
+    build:
+      context: .  # Dossier de build (racine du projet)
+      dockerfile: Dockerfile  # Fichier Dockerfile à utiliser
+    
+    # Mappage des ports: hôte:conteneur
+    ports:
+      - "3000:3000"  # Expose le port 3000 du conteneur sur le port 3000 de l'hôte
+    
+    # Variables d'environnement
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/dentwise?schema=public
+      - NODE_ENV=development  # Mode développement activé
+    
+    # Dépendances entre services
+    depends_on:
+      - db  # Attend que le service db soit démarré
+    
+    # Politique de redémarrage
+    restart: unless-stopped  # Redémarre automatiquement sauf si arrêté manuellement
+    
+    # Réseau auquel le service est connecté
+    networks:
+      - app-network
+    
+    # Volumes pour la persistance des données et le développement
+    volumes:
+      - .:/app  # Monte le code source actuel dans /app (développement)
+      - /app/node_modules  # Évite d'écraser node_modules du conteneur
+      - /app/.next  # Cache le dossier de build Next.js
+
+  # Service pour la base de données PostgreSQL
+  db:
+    image: postgres:15-alpine  # Image officielle PostgreSQL sur Alpine Linux
+    
+    # Configuration de la base de données
+    environment:
+      - POSTGRES_USER=postgres  # Utilisateur par défaut
+      - POSTGRES_PASSWORD=postgres  # Mot de passe (à sécuriser en production)
+      - POSTGRES_DB=dentwise  # Nom de la base de données
+    
+    # Volume pour la persistance des données
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Stockage persistant des données
+    
+    # Réseau
+    networks:
+      - app-network
+    
+    # Exposition des ports
+    ports:
+      - "5434:5432"  # Port 5432 du conteneur exposé sur le port 5434 de l'hôte
+    
+    # Vérification de l'état de santé
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]  # Vérifie si PostgreSQL est prêt
+      interval: 10s  # Vérification toutes les 10 secondes
+      timeout: 5s    # Délai d'attente de 5 secondes
+      retries: 5     # Nombre de tentatives avant échec
+
+# Configuration des réseaux
+networks:
+  app-network:  # Réseau personnalisé pour la communication entre les services
+    driver: bridge  # Pilote de réseau par défaut pour la communication inter-conteneurs
+
+# Définition des volumes persistants
+volumes:
+  postgres_data:  # Volume pour la persistance des données PostgreSQL
